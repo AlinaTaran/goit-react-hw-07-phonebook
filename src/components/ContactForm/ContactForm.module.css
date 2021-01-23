@@ -1,0 +1,39 @@
+label {
+  font-size: 22px;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+input {
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 6px;
+  transition: all 0.3s linear;
+  outline: none;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.input:focus,
+.input:hover {
+  border-bottom: 2px solid rgb(223, 154, 208);
+}
+
+.button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid rgb(223, 154, 208);
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: all 0.3s linear;
+  margin-bottom: 30px;
+  width: 100%;
+  outline: none;
+}
+.button:hover {
+  border: 2px solid rgba(61, 53, 8, 0.63);
+}
+.button:active {
+  position: relative;
+  top: 1px;
+}
