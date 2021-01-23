@@ -1,82 +1,64 @@
-import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 import { useSelector, useDispatch } from 'react-redux';
 import { contactsOperations, contactsSelectors } from 'redux/contact';
 import s from './ContactForm.module.css';
 
 function ContactForm() {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const { register, handleSubmit, errors, reset, control } = useForm();
 
   const contacts = useSelector(contactsSelectors.getContacts);
   const dispatch = useDispatch();
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        return;
-    }
-  };
 
   const isExistName = existName => {
     const nameNormalized = existName.toLowerCase();
     return contacts.find(({ name }) => name.toLowerCase() === nameNormalized);
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const submitHandler = ({ name, number }) => {
     const sameName = isExistName(name);
-    const contact = { name, number };
 
     if (sameName) {
       alert(`${name} is already in your phonebook`);
     } else {
-      dispatch(contactsOperations.addContact(contact));
+      dispatch(contactsOperations.addContact(name, number));
     }
 
-    if (contact === '') {
-      return alert('Enter contact');
-    }
-
-    resetForm();
-  };
-
-  const resetForm = () => {
-    setName('');
-    setNumber('');
+    reset();
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
+    <form className={s.form} onSubmit={handleSubmit(submitHandler)}>
       <label className={s.label}>
         Name
         <input
           className={s.input}
           name="name"
-          value={name}
+          ref={register({
+            minLength: { value: 2, message: 'Too short name' },
+            maxLength: { value: 20, message: 'Too long name' },
+            required: 'Is a required field',
+          })}
           type="text"
-          onChange={handleChange}
         />
+        {errors.name && <p className={s.errors}>{errors.name.message}</p>}
       </label>
 
       <label>
         Number
-        <input
-          className={s.input}
+        <Controller
+          as={InputMask}
           name="number"
-          type="tel"
-          value={number}
-          onChange={handleChange}
+          rules={{
+            required: 'Phone number is required',
+          }}
+          defaultValue=""
+          control={control}
+          className={s.input}
+          placeholder="+38 (___) ___-__-__"
+          mask="+38 (999) 999-99-99"
         />
+        {errors.number && <p className={s.errors}>{errors.number.message}</p>}
       </label>
 
       <button className={s.button} type="submit">

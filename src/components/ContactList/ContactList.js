@@ -9,6 +9,7 @@ const ContactsList = () => {
   const dispatch = useDispatch();
   const visibleContacts = useSelector(contactsSelectors.filteredContacts);
 
+  
   useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
 
   return (

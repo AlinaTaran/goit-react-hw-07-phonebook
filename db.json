@@ -1,53 +1,14 @@
 {
   "contacts": [
     {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
+      "name": "Alina",
+      "number": "+38 (067) 189-85-21",
       "id": 1
     },
     {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
+      "name": "Bart",
+      "number": "+38 (987) 665-77-84",
       "id": 2
-    },
-    {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
-      "id": 3
-    },
-    {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
-      "id": 4
-    },
-    {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
-      "id": 5
-    },
-    {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
-      "id": 6
-    },
-    {
-      "name": {
-        "name": "Alina",
-        "number": "4535"
-      },
-      "id": 7
     }
   ]
 }
